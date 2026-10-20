@@ -15,6 +15,18 @@ window.VENTAS_CONFIG = {
   videoUrl: "",
   videoPoster: "",
 
+  // Capturas de la plataforma. Guarda las imágenes en la carpeta img/ con estos nombres
+  // (o cambia las rutas). Las que no existan se omiten; si no hay ninguna, la sección se oculta.
+  // Usa capturas con datos de ejemplo: no muestres personal real de un cliente.
+  capturas: [
+    { img: "img/en-vivo.png",      titulo: "En vivo",           desc: "Quién llegó, quién falta y quién está en almuerzo, al instante." },
+    { img: "img/kiosco.png",       titulo: "Kiosco de marcación", desc: "Reconocimiento facial o DNI desde una tablet en la entrada." },
+    { img: "img/picking.png",      titulo: "Picking diario",    desc: "Control de la operación día a día con Excel por rango de fechas." },
+    { img: "img/ausentismo.png",   titulo: "Ausentismo",        desc: "Indicadores para detectar patrones antes de que afecten la operación." },
+    { img: "img/planilla.png",     titulo: "Planilla y pagos",  desc: "Asistencia lista para el cierre de mes." },
+    { img: "img/personal.png",     titulo: "Personal",          desc: "Censo del personal y carga masiva desde Excel." },
+  ],
+
   moneda: "S/",
   // PRECIOS DE EJEMPLO: reemplázalos por los tuyos. precio: null muestra "Cotizar".
   planes: [

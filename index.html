@@ -43,9 +43,10 @@
   .nav ul a:hover{color:var(--tx)}
   @media(max-width:760px){.nav ul{display:none}}
   /* hero */
-  .hero{padding:80px 0 56px;background:radial-gradient(900px 400px at 80% -10%,var(--p-soft),transparent)}
-  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
-  @media(max-width:880px){.hero-grid{grid-template-columns:1fr}}
+  .hero{padding:0;background:var(--bg)}
+  .hero-grid{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 64px);min-height:calc(100svh - 64px)}
+  .hero-copy{align-self:center;max-width:620px;justify-self:end;padding:48px 48px 48px max(20px,calc((100vw - 1120px)/2 + 20px))}
+  @media(max-width:880px){.hero-grid{grid-template-columns:1fr}.hero-copy{padding:44px 20px;max-width:none}}
   .hero .lead{margin:20px 0 28px}
   .cta{display:flex;gap:12px;flex-wrap:wrap}
   .trust{display:flex;gap:20px;flex-wrap:wrap;margin-top:26px;color:var(--mut);font-size:.9rem}
@@ -108,8 +109,26 @@
   .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   @media(max-width:480px){.two{grid-template-columns:1fr}}
   /* animación del hero */
-  .hero-media{position:relative}
-  .hero-media video{width:100%;border-radius:20px;box-shadow:var(--sh);border:1px solid var(--bd);display:block}
+  .hero-media{position:relative;display:grid;place-items:center;padding:56px 7%;overflow:hidden;border-bottom-left-radius:64px;background:radial-gradient(600px 400px at 85% 0%,rgba(255,255,255,.22),transparent),linear-gradient(160deg,var(--p) 0%,var(--p-dark) 100%)}
+  @media(max-width:880px){.hero-media{min-height:480px;border-bottom-left-radius:0;border-top-left-radius:40px}}
+  .hero-media .mock{width:100%;max-width:440px;position:relative;z-index:1}
+  .hero-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .hero-media.has-video{padding:0}
+  .hero-media.has-video::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,color-mix(in srgb,var(--p) 70%,transparent),transparent 55%)}
+  .hero-media.has-video .mock,.hero-media.has-video .float{display:none}
+  .brandchip{position:absolute;top:22px;left:22px;z-index:2;display:flex;align-items:center;gap:8px;background:rgba(10,12,24,.55);backdrop-filter:blur(8px);color:#fff;font-weight:700;font-size:.85rem;padding:6px 12px 6px 6px;border-radius:12px}
+  .brandchip .dot{width:24px;height:24px;font-size:13px;background:#fff;color:var(--p)}
+  .shot{display:grid;grid-template-columns:1.6fr .8fr;gap:32px;align-items:start}
+  @media(max-width:880px){.shot{grid-template-columns:1fr}}
+  .shot-frame{background:var(--bg);border:1px solid var(--bd);border-radius:16px;box-shadow:var(--sh);padding:12px;overflow:hidden}
+  .shot-frame img{width:100%;display:block;border-radius:8px;aspect-ratio:16/10;object-fit:cover;object-position:top;background:var(--bg2);transition:opacity .25s}
+  .shot-frame .mock-top{margin-bottom:10px}
+  #shotTabs{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+  @media(max-width:880px){#shotTabs{flex-direction:row;flex-wrap:wrap}}
+  #shotTabs button{font:inherit;font-weight:600;text-align:left;padding:11px 16px;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);cursor:pointer}
+  #shotTabs button[aria-selected=true]{background:var(--p);border-color:var(--p);color:var(--on-p)}
+  .toast{position:absolute;right:84px;bottom:22px;z-index:2;max-width:300px;background:#fff;color:#12141F;border-radius:14px;padding:12px 16px;font-size:.85rem;font-weight:600;box-shadow:0 12px 30px rgba(0,0,0,.25);display:flex;gap:10px;align-items:center;animation:slide .5s ease both}
+  .toast small{display:block;color:#5B6075;font-weight:500}
   .live{margin-left:auto;font-size:.75rem;font-weight:700;color:var(--ok);display:flex;align-items:center;gap:6px}
   .live em{width:8px;height:8px;border-radius:50%;background:var(--ok);animation:pulse 1.4s infinite}
   @keyframes pulse{0%{box-shadow:0 0 0 0 #16A34A66}100%{box-shadow:0 0 0 10px #16A34A00}}
@@ -127,9 +146,8 @@
   .stat b{transition:transform .3s}
   .stat b.bump{transform:scale(1.25);color:var(--p)}
   .float{position:absolute;background:var(--bg);border:1px solid var(--bd);box-shadow:var(--sh);border-radius:12px;padding:8px 14px;font-size:.85rem;font-weight:600;animation:bob 4s ease-in-out infinite}
-  .f1{left:-26px;bottom:60px}
-  .f2{right:-14px;top:-16px;animation-delay:1.2s}
-  @media(max-width:880px){.f1{left:0}.f2{right:0}}
+  .f1{left:6%;bottom:96px;z-index:2;color:var(--tx)}
+  .f2{right:6%;top:70px;z-index:2;animation-delay:1.2s;color:var(--tx)}
   .rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
   .rv.in{opacity:1;transform:none}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
@@ -154,8 +172,8 @@
 </header>
 
 <section class="hero">
-  <div class="wrap hero-grid">
-    <div>
+  <div class="hero-grid">
+    <div class="hero-copy">
       <div class="eyebrow">Asistencia biométrica para empresas</div>
       <h1>Sabe quién está en tu operación, en tiempo real.</h1>
       <p class="lead">Marcación por rostro o DNI, seguimiento en vivo, picking diario, ausentismo y planilla. Sin servidores que instalar: tu equipo marca hoy y tú ves todo desde un solo panel.</p>
@@ -178,6 +196,8 @@
       </div>
       <div class="float f1">⏱ Hora del servidor</div>
       <div class="float f2">📊 Excel en 1 clic</div>
+      <div class="brandchip"><span class="dot">◉</span><span data-v="producto">Control de Asistencia</span></div>
+      <div class="toast" id="toast" aria-live="polite"></div>
     </div>
   </div>
 </section>
@@ -196,7 +216,20 @@
   </div>
 </section>
 
-<section id="como" class="alt">
+<section id="capturas" class="alt" hidden>
+  <div class="wrap">
+    <div class="head"><div class="eyebrow">La plataforma</div><h2>Míralo por dentro</h2></div>
+    <div class="shot">
+      <div class="shot-frame"><div class="mock-top"><i></i><i></i><i></i></div><img id="shotImg" alt=""></div>
+      <div class="shot-side">
+        <div id="shotTabs" role="tablist"></div>
+        <p id="shotDesc" class="lead" style="font-size:1rem"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="como">
   <div class="wrap">
     <div class="head"><div class="eyebrow">Cómo funciona</div><h2>De la reunión a marcar, en pocos días</h2></div>
     <div class="steps">
@@ -308,7 +341,9 @@
 
   // Video real (si hay) o simulación en vivo
   if(C.videoUrl){
-    $("#heroMedia").innerHTML='<video src="'+esc(C.videoUrl)+'"'+(C.videoPoster?' poster="'+esc(C.videoPoster)+'"':'')+' autoplay muted loop playsinline></video>';
+    var hm=$("#heroMedia"); hm.classList.add("has-video");
+    hm.insertAdjacentHTML("afterbegin",'<video src="'+esc(C.videoUrl)+'"'+(C.videoPoster?' poster="'+esc(C.videoPoster)+'"':'')+' autoplay muted loop playsinline></video>');
+    $("#toast").hidden=true;
   } else {
     var gente=[["Carlos M.","Rostro","🙂"],["Lucía R.","Rostro","🙂"],["Jorge P.","DNI","🪪"],["Ana T.","Rostro","🙂"],["Miguel S.","DNI","🪪"],["Rosa V.","Rostro","🙂"],["Luis H.","Rostro","🙂"]];
     var pasos=["Ingreso","Inicio de almuerzo","Fin de almuerzo","Salida"];
@@ -325,11 +360,41 @@
       while(feed.children.length>4) feed.removeChild(feed.lastChild);
       if(paso==="Ingreso"){ pres++; bump($("#nPres"),pres); }
       if(tarde){ tard++; bump($("#nTard"),tard); }
+      var tt=$("#toast"); tt.style.animation="none"; void tt.offsetWidth; tt.style.animation="";
+      tt.innerHTML='<span style="font-size:22px">'+p[2]+'</span><span>'+p[0]+' · '+paso+'<small>'+(p[1]==="DNI"?"Marcó con DNI":"Rostro reconocido")+' · '+hora+'</small></span>';
       setTimeout(function(){scan.classList.remove("ok");scanT.textContent="Reconociendo rostro…"},1500);
       i++;
     }
     tick(); setInterval(tick,2600);
   }
+
+  // Galería de capturas: solo se muestran las imágenes que existen
+  (function(){
+    var lista=C.capturas||[], ok=[], pend=lista.length;
+    if(!pend) return;
+    lista.forEach(function(c){
+      var im=new Image();
+      im.onload=function(){ok.push(c);done()};
+      im.onerror=done;
+      im.src=c.img;
+    });
+    function done(){
+      if(--pend>0) return;
+      ok.sort(function(a,b){return lista.indexOf(a)-lista.indexOf(b)});
+      if(!ok.length) return;
+      var tabs=$("#shotTabs"), img=$("#shotImg");
+      tabs.innerHTML=ok.map(function(c,k){return '<button role="tab" aria-selected="'+(k===0)+'" data-k="'+k+'">'+esc(c.titulo)+'</button>'}).join("");
+      function show(k){
+        img.style.opacity=0;
+        setTimeout(function(){img.src=ok[k].img;img.alt=ok[k].titulo;$("#shotDesc").textContent=ok[k].desc||"";img.style.opacity=1},180);
+        tabs.querySelectorAll("button").forEach(function(b,j){b.setAttribute("aria-selected",j===k)});
+      }
+      tabs.addEventListener("click",function(e){var b=e.target.closest("button");if(b)show(+b.dataset.k)});
+      img.src=ok[0].img; img.alt=ok[0].titulo; $("#shotDesc").textContent=ok[0].desc||"";
+      $("#capturas").hidden=false;
+      var n=0; setInterval(function(){ if(document.hidden||tabs.matches(":hover")) return; n=(n+1)%ok.length; show(n) },5000);
+    }
+  })();
 
   // Aparición al hacer scroll
   var rv=document.querySelectorAll(".card,.step,details,.head");

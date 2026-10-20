@@ -22,3 +22,7 @@ python -m http.server 8080
 ```
 
 y abre http://localhost:8080.
+
+## Capturas de la plataforma
+
+Guarda las imagenes en `img/` (`en-vivo.png`, `kiosco.png`, `picking.png`, `ausentismo.png`, `planilla.png`, `personal.png`) o ajusta `capturas` en `ventas.config.js`. La seccion 'Miralo por dentro' solo aparece si existe al menos una imagen. Usa capturas con datos de ejemplo, no personal real de un cliente.
