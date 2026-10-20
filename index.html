@@ -124,13 +124,14 @@
   @media(max-width:880px){.shot{grid-template-columns:1fr}}
   .shot-frame{background:var(--bg);border:1px solid var(--bd);border-radius:16px;box-shadow:var(--sh);padding:12px;overflow:hidden}
   .shot-frame img{width:100%;display:block;border-radius:8px;aspect-ratio:16/10;object-fit:cover;object-position:top;background:var(--bg2);transition:opacity .25s}
+  .shot-frame img.v{object-fit:contain;object-position:center}
   .shot-frame .mock-top{margin-bottom:10px}
   #shotTabs{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
   @media(max-width:880px){#shotTabs{flex-direction:row;flex-wrap:wrap}}
   #shotTabs button{font:inherit;font-weight:600;text-align:left;padding:11px 16px;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);cursor:pointer}
   #shotTabs button[aria-selected=true]{background:var(--p);border-color:var(--p);color:var(--on-p)}
   .demo-tag{margin-left:auto;font-size:.7rem;font-weight:600;color:var(--mut)}
-  .ms{display:grid;grid-template-columns:150px 1fr;aspect-ratio:16/10;border-radius:8px;background:var(--bg2);overflow:hidden;font-size:.8rem;transition:opacity .25s}
+  .ms{display:grid;grid-template-columns:150px 1fr;grid-template-rows:100%;aspect-ratio:16/10;border-radius:8px;background:var(--bg2);overflow:hidden;font-size:.8rem;transition:opacity .25s}
   .ms-side{background:var(--bg);border-right:1px solid var(--bd);padding:12px 8px}
   .ms-side b{display:block;font-size:.8rem;padding:2px 8px 10px}
   .ms-side span{display:block;padding:6px 10px;border-radius:8px;color:var(--mut);font-size:.75rem;white-space:nowrap}
@@ -432,7 +433,7 @@
       var c=lista[k];
       $("#shotDesc").textContent=c.desc||"";
       if(real[k]){ mk.hidden=true; img.hidden=false; img.src=c.img; img.alt=c.titulo; $("#demoTag").style.display="none"; }
-      else { img.hidden=true; mk.hidden=false; mk.style.display=((c.tipo||c.img||"").indexOf("kiosco")>-1)?"block":""; mk.innerHTML=vista(c); $("#demoTag").style.display=""; }
+      else { img.hidden=true; mk.hidden=false; mk.innerHTML=vista(c); $("#demoTag").style.display=""; }
     }
     function arrancar(){
       tabs.innerHTML=lista.map(function(c,k){return '<button role="tab" aria-selected="'+(k===0)+'" data-k="'+k+'">'+esc(c.titulo)+'</button>'}).join("");
