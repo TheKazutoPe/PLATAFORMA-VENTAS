@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Control de Asistencia — Asistencia biométrica para tu empresa</title>
+<meta name="description" content="Marcación por rostro o DNI, seguimiento en vivo, picking, ausentismo y planilla. Sin instalar servidores, listo en días.">
+<meta name="theme-color" content="#4F46E5">
+<style>
+  :root{
+    --p:#4F46E5; --p-soft:#EEF0FF; --p-dark:#3F37C9; --on-p:#fff;
+    --bg:#fff; --bg2:#F6F7FB; --tx:#12141F; --mut:#5B6075; --bd:#E4E6EF; --ok:#16A34A;
+    --r:16px; --sh:0 10px 30px rgba(18,20,31,.08);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--bg:#0E1018;--bg2:#151826;--tx:#F2F3F8;--mut:#A0A5BC;--bd:#262A3D;--p-soft:#1C2040;--sh:0 10px 30px rgba(0,0,0,.4)}
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--tx);background:var(--bg)}
+  a{color:inherit}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+  section{padding:72px 0}
+  .alt{background:var(--bg2)}
+  h1,h2,h3{line-height:1.15;margin:0}
+  h1{font-size:clamp(2.1rem,5vw,3.6rem);letter-spacing:-.02em}
+  h2{font-size:clamp(1.6rem,3.5vw,2.4rem);letter-spacing:-.01em}
+  .eyebrow{color:var(--p);font-weight:700;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+  .lead{color:var(--mut);font-size:1.15rem;max-width:620px}
+  .head{margin-bottom:40px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:12px;font-weight:600;text-decoration:none;border:1px solid transparent;cursor:pointer;font:inherit;font-weight:600}
+  .btn-p{background:var(--p);color:var(--on-p)}
+  .btn-p:hover{background:var(--p-dark)}
+  .btn-o{border-color:var(--bd);background:var(--bg)}
+  .btn-o:hover{border-color:var(--p);color:var(--p)}
+  /* nav */
+  header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--bd)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-weight:800;text-decoration:none;display:flex;align-items:center;gap:10px}
+  .dot{width:28px;height:28px;border-radius:8px;background:var(--p);display:grid;place-items:center;color:var(--on-p);font-size:15px}
+  .nav ul{display:flex;gap:26px;list-style:none;margin:0;padding:0}
+  .nav ul a{text-decoration:none;color:var(--mut);font-size:.95rem}
+  .nav ul a:hover{color:var(--tx)}
+  @media(max-width:760px){.nav ul{display:none}}
+  /* hero */
+  .hero{padding:80px 0 56px;background:radial-gradient(900px 400px at 80% -10%,var(--p-soft),transparent)}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+  @media(max-width:880px){.hero-grid{grid-template-columns:1fr}}
+  .hero .lead{margin:20px 0 28px}
+  .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .trust{display:flex;gap:20px;flex-wrap:wrap;margin-top:26px;color:var(--mut);font-size:.9rem}
+  .trust span::before{content:"✓ ";color:var(--ok);font-weight:700}
+  /* mock */
+  .mock{background:var(--bg);border:1px solid var(--bd);border-radius:20px;box-shadow:var(--sh);padding:18px}
+  .mock-top{display:flex;gap:6px;margin-bottom:14px}
+  .mock-top i{width:10px;height:10px;border-radius:50%;background:var(--bd)}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+  .stat{background:var(--bg2);border-radius:12px;padding:12px}
+  .stat b{display:block;font-size:1.5rem}
+  .stat small{color:var(--mut)}
+  .row{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:10px;font-size:.92rem}
+  .row:nth-child(odd){background:var(--bg2)}
+  .tag{font-size:.75rem;font-weight:700;padding:3px 9px;border-radius:99px}
+  .t-ok{background:#16A34A22;color:var(--ok)}
+  .t-wa{background:#F59E0B22;color:#B45309}
+  .t-no{background:#DC262622;color:#DC2626}
+  /* grids */
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  @media(max-width:880px){.grid3{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.grid3{grid-template-columns:1fr}}
+  .card{background:var(--bg);border:1px solid var(--bd);border-radius:var(--r);padding:24px}
+  .card .ic{width:44px;height:44px;border-radius:12px;background:var(--p-soft);display:grid;place-items:center;font-size:22px;margin-bottom:14px}
+  .card h3{font-size:1.1rem;margin-bottom:6px}
+  .card p{margin:0;color:var(--mut);font-size:.95rem}
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;counter-reset:s}
+  @media(max-width:880px){.steps{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.steps{grid-template-columns:1fr}}
+  .step{counter-increment:s}
+  .step::before{content:counter(s);display:grid;place-items:center;width:36px;height:36px;border-radius:50%;background:var(--p);color:var(--on-p);font-weight:700;margin-bottom:12px}
+  .step h3{font-size:1.05rem;margin-bottom:4px}
+  .step p{margin:0;color:var(--mut);font-size:.95rem}
+  /* plans */
+  .plan{display:flex;flex-direction:column}
+  .plan.top{border:2px solid var(--p);box-shadow:var(--sh);position:relative}
+  .plan .badge{position:absolute;top:-13px;left:24px;background:var(--p);color:var(--on-p);font-size:.75rem;font-weight:700;padding:4px 12px;border-radius:99px}
+  .plan h3{font-size:1.3rem}
+  .plan .para{color:var(--mut);font-size:.92rem;margin:4px 0 18px;min-height:2.8em}
+  .price{font-size:2.4rem;font-weight:800;line-height:1}
+  .price small{font-size:.95rem;font-weight:500;color:var(--mut)}
+  .colab{margin:8px 0 18px;font-weight:600;color:var(--p)}
+  .plan ul{list-style:none;padding:0;margin:0 0 24px;flex:1}
+  .plan li{padding:6px 0 6px 26px;position:relative;font-size:.95rem}
+  .plan li::before{content:"✓";position:absolute;left:0;color:var(--ok);font-weight:700}
+  .plan .btn{justify-content:center}
+  .note{color:var(--mut);font-size:.88rem;margin-top:18px;text-align:center}
+  /* faq */
+  details{border:1px solid var(--bd);border-radius:12px;background:var(--bg);padding:16px 20px;margin-bottom:12px}
+  summary{cursor:pointer;font-weight:600}
+  details p{color:var(--mut);margin:10px 0 0}
+  /* contact */
+  .contact{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+  @media(max-width:880px){.contact{grid-template-columns:1fr}}
+  form{display:grid;gap:14px}
+  label{font-size:.88rem;font-weight:600;display:grid;gap:6px}
+  input,select,textarea{font:inherit;padding:12px 14px;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);width:100%}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--p);border-color:transparent}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:480px){.two{grid-template-columns:1fr}}
+  footer{padding:32px 0;border-top:1px solid var(--bd);color:var(--mut);font-size:.9rem}
+  footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .wa-float{position:fixed;right:18px;bottom:18px;z-index:20;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;box-shadow:0 8px 20px rgba(0,0,0,.25);text-decoration:none;font-size:26px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#"><span class="dot">◉</span><span data-v="producto">Control de Asistencia</span></a>
+    <ul>
+      <li><a href="#funciones">Funciones</a></li>
+      <li><a href="#como">Cómo funciona</a></li>
+      <li><a href="#planes">Planes</a></li>
+      <li><a href="#faq">Preguntas</a></li>
+    </ul>
+    <a class="btn btn-p" href="#contacto">Solicitar demo</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Asistencia biométrica para empresas</div>
+      <h1>Sabe quién está en tu operación, en tiempo real.</h1>
+      <p class="lead">Marcación por rostro o DNI, seguimiento en vivo, picking diario, ausentismo y planilla. Sin servidores que instalar: tu equipo marca hoy y tú ves todo desde un solo panel.</p>
+      <div class="cta">
+        <a class="btn btn-p" href="#contacto">Solicitar demo gratis</a>
+        <a class="btn btn-o" id="demoBtn" href="#" target="_blank" rel="noopener" hidden>Ver demo en vivo</a>
+      </div>
+      <div class="trust"><span>Marcación en segundos</span><span>Hora del servidor, no del dispositivo</span><span>Exporta a Excel</span></div>
+    </div>
+    <div class="mock" aria-hidden="true">
+      <div class="mock-top"><i></i><i></i><i></i></div>
+      <div class="stats">
+        <div class="stat"><b>148</b><small>Presentes</small></div>
+        <div class="stat"><b>6</b><small>Tardanzas</small></div>
+        <div class="stat"><b>3</b><small>Faltas</small></div>
+      </div>
+      <div class="row"><span>Ingreso · Turno mañana</span><span class="tag t-ok">Presente</span></div>
+      <div class="row"><span>Almacén · Zona A</span><span class="tag t-ok">Presente</span></div>
+      <div class="row"><span>Despacho · Zona B</span><span class="tag t-wa">Justificado</span></div>
+      <div class="row"><span>Picking · Turno tarde</span><span class="tag t-no">Falta</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="funciones">
+  <div class="wrap">
+    <div class="head"><div class="eyebrow">Funciones</div><h2>Todo el control de personal en una plataforma</h2></div>
+    <div class="grid3">
+      <div class="card"><div class="ic">🙂</div><h3>Marcación por rostro o DNI</h3><p>Ingreso, inicio y fin de almuerzo, y salida. Desde una tablet en la entrada o desde el celular.</p></div>
+      <div class="card"><div class="ic">📡</div><h3>Seguimiento en vivo</h3><p>Ve quién llegó, quién falta y quién está en almuerzo, filtrando por área, zona y fecha.</p></div>
+      <div class="card"><div class="ic">📦</div><h3>Picking diario</h3><p>Control de la operación día a día y descarga del Excel por rango de fechas.</p></div>
+      <div class="card"><div class="ic">📉</div><h3>Ausentismo y rotación</h3><p>Indicadores claros para detectar patrones y actuar antes de que afecten la operación.</p></div>
+      <div class="card"><div class="ic">💵</div><h3>Planilla y pagos</h3><p>Asistencia lista para planilla, sin reconstruir datos a mano al cierre de mes.</p></div>
+      <div class="card"><div class="ic">📥</div><h3>Carga masiva</h3><p>Importa a todo tu personal desde Excel en minutos y mantén el censo al día.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="como" class="alt">
+  <div class="wrap">
+    <div class="head"><div class="eyebrow">Cómo funciona</div><h2>De la reunión a marcar, en pocos días</h2></div>
+    <div class="steps">
+      <div class="step"><h3>Nos cuentas tu operación</h3><p>Áreas, turnos, zonas y supervisores.</p></div>
+      <div class="step"><h3>Configuramos tu instalación</h3><p>Con tu logo y colores si lo necesitas.</p></div>
+      <div class="step"><h3>Cargas a tu personal</h3><p>Importación masiva desde Excel.</p></div>
+      <div class="step"><h3>Tu equipo empieza a marcar</h3><p>Y tú ves todo en el Centro de Control.</p></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head"><div class="eyebrow">Marca blanca</div><h2>Con tu identidad, no con la nuestra</h2>
+      <p class="lead" style="margin-top:12px">Cada cliente recibe su propia instalación con su logo, nombre y color. Tu equipo la siente como una herramienta propia.</p></div>
+  </div>
+</section>
+
+<section id="planes" class="alt">
+  <div class="wrap">
+    <div class="head"><div class="eyebrow">Planes</div><h2>Elige el tamaño de tu operación</h2></div>
+    <div class="grid3" id="planes-grid"></div>
+    <p class="note">Precios sin IGV. ¿Necesitas algo distinto? Armamos un plan a tu medida.</p>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap" style="max-width:780px">
+    <div class="head"><div class="eyebrow">Preguntas frecuentes</div><h2>Lo que suelen preguntarnos</h2></div>
+    <details><summary>¿Necesito comprar equipos especiales?</summary><p>No. Funciona con una tablet o celular con cámara en la entrada. También puedes marcar por DNI desde el celular.</p></details>
+    <details><summary>¿Cuánto demora ponerlo en marcha?</summary><p>Depende de la cantidad de personal y áreas, pero la configuración inicial y la carga masiva se hacen en pocos días.</p></details>
+    <details><summary>¿Se puede poner mi logo y mis colores?</summary><p>Sí. La plataforma es de marca blanca: nombre, logo y color principal se configuran por cliente.</p></details>
+    <details><summary>¿La hora de marcación se puede alterar?</summary><p>No desde el dispositivo: la hora que se guarda es la del servidor.</p></details>
+    <details><summary>¿Puedo ver una demo antes de decidir?</summary><p>Claro. Solicítala con el formulario y te la mostramos con datos de ejemplo.</p></details>
+  </div>
+</section>
+
+<section id="contacto" class="alt">
+  <div class="wrap contact">
+    <div>
+      <div class="eyebrow">Contacto</div>
+      <h2>Pide tu demo gratis</h2>
+      <p class="lead" style="margin:14px 0 20px">Cuéntanos de tu empresa y te respondemos por WhatsApp con una propuesta.</p>
+      <p style="color:var(--mut)">También puedes escribirnos a <a id="mailLink" href="#"></a></p>
+    </div>
+    <form id="form">
+      <div class="two">
+        <label>Nombre<input name="nombre" required autocomplete="name"></label>
+        <label>Empresa<input name="empresa" required autocomplete="organization"></label>
+      </div>
+      <div class="two">
+        <label>Teléfono<input name="tel" type="tel" required autocomplete="tel"></label>
+        <label>Colaboradores
+          <select name="colab"><option>Menos de 50</option><option>50 a 250</option><option>Más de 250</option></select>
+        </label>
+      </div>
+      <label>Plan de interés<select name="plan" id="planSel"></select></label>
+      <label>Mensaje (opcional)<textarea name="msg" rows="3"></textarea></label>
+      <button class="btn btn-p" type="submit" style="justify-content:center">Enviar por WhatsApp</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><span>© <span id="year"></span> <span data-v="producto">Control de Asistencia</span></span><span data-v="lema"></span></div>
+</footer>
+
+<a class="wa-float" id="waFloat" href="#" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">💬</a>
+
+<script src="ventas.config.js"></script>
+<script>
+(function(){
+  var C = window.VENTAS_CONFIG || {};
+  var $ = function(s){return document.querySelector(s)};
+  var esc = function(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})};
+
+  // Color de marca y contraste del texto sobre botones
+  if(C.color){
+    var h=C.color.replace("#",""); if(h.length===3) h=h.replace(/./g,"$&$&");
+    var n=parseInt(h,16), r=n>>16, g=(n>>8)&255, b=n&255;
+    var dark="#"+[r,g,b].map(function(v){return Math.round(v*.82).toString(16).padStart(2,"0")}).join("");
+    var soft="rgba("+r+","+g+","+b+",.1)";
+    var st=document.documentElement.style;
+    st.setProperty("--p",C.color); st.setProperty("--p-dark",dark); st.setProperty("--p-soft",soft);
+    st.setProperty("--on-p",(r*299+g*587+b*114)/1000>150?"#12141F":"#fff");
+  }
+  document.querySelectorAll("[data-v]").forEach(function(el){ if(C[el.dataset.v]) el.textContent=C[el.dataset.v]; });
+  if(C.producto) document.title=C.producto+" — Asistencia biométrica para tu empresa";
+  $("#year").textContent=new Date().getFullYear();
+
+  var wa = "https://wa.me/"+(C.whatsapp||"");
+  $("#waFloat").href = wa+"?text="+encodeURIComponent("Hola, quiero información sobre "+(C.producto||"el servicio"));
+  if(C.correo){ var m=$("#mailLink"); m.href="mailto:"+C.correo; m.textContent=C.correo; }
+  if(C.demoUrl){ var d=$("#demoBtn"); d.href=C.demoUrl; d.hidden=false; }
+
+  // Planes
+  var money=function(p){return (C.moneda||"")+" "+p.toLocaleString("es-PE")};
+  $("#planes-grid").innerHTML=(C.planes||[]).map(function(p){
+    return '<div class="card plan'+(p.destacado?' top':'')+'">'+
+      (p.destacado?'<span class="badge">Más elegido</span>':'')+
+      '<h3>'+esc(p.nombre)+'</h3><p class="para">'+esc(p.para)+'</p>'+
+      '<div class="price">'+(p.precio==null?'Cotizar':money(p.precio)+' <small>'+esc(p.periodo)+'</small>')+'</div>'+
+      '<div class="colab">'+esc(p.colaboradores)+'</div>'+
+      '<ul>'+p.incluye.map(function(i){return '<li>'+esc(i)+'</li>'}).join("")+'</ul>'+
+      '<a class="btn '+(p.destacado?'btn-p':'btn-o')+'" href="#contacto" data-plan="'+esc(p.nombre)+'">'+(p.precio==null?'Solicitar cotización':'Elegir '+esc(p.nombre))+'</a></div>';
+  }).join("");
+  $("#planSel").innerHTML=(C.planes||[]).map(function(p){return '<option>'+esc(p.nombre)+'</option>'}).join("")+'<option>No estoy seguro</option>';
+  document.querySelectorAll("[data-plan]").forEach(function(a){ a.addEventListener("click",function(){ $("#planSel").value=a.dataset.plan; }); });
+
+  // Formulario -> WhatsApp (no se guarda nada en ningún servidor)
+  $("#form").addEventListener("submit",function(e){
+    e.preventDefault();
+    var f=new FormData(e.target);
+    var t="Hola, quiero una demo de "+(C.producto||"el servicio")+".\n"+
+      "Nombre: "+f.get("nombre")+"\nEmpresa: "+f.get("empresa")+"\nTeléfono: "+f.get("tel")+
+      "\nColaboradores: "+f.get("colab")+"\nPlan: "+f.get("plan")+(f.get("msg")?"\nMensaje: "+f.get("msg"):"");
+    window.open(wa+"?text="+encodeURIComponent(t),"_blank","noopener");
+  });
+})();
+</script>
+</body>
+</html>
