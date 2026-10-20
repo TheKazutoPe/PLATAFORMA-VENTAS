@@ -19,7 +19,7 @@ window.VENTAS_CONFIG = {
   // (o cambia las rutas). Las que no existan se omiten; si no hay ninguna, la sección se oculta.
   // Usa capturas con datos de ejemplo: no muestres personal real de un cliente.
   capturas: [
-    { img: "img/en-vivo.png",      titulo: "En vivo",           desc: "Quién llegó, quién falta y quién está en almuerzo, al instante." },
+    { tipo: "en-vivo", img: "img/en-vivo.png",      titulo: "En vivo",          desc: "Quién llegó, quién falta y quién está en almuerzo, al instante." },
     { img: "img/kiosco.png",       titulo: "Kiosco de marcación", desc: "Reconocimiento facial o DNI desde una tablet en la entrada." },
     { img: "img/picking.png",      titulo: "Picking diario",    desc: "Control de la operación día a día con Excel por rango de fechas." },
     { img: "img/ausentismo.png",   titulo: "Ausentismo",        desc: "Indicadores para detectar patrones antes de que afecten la operación." },

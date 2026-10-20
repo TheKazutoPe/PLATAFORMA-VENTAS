@@ -16,6 +16,7 @@
     :root{--bg:#0E1018;--bg2:#151826;--tx:#F2F3F8;--mut:#A0A5BC;--bd:#262A3D;--p-soft:#1C2040;--sh:0 10px 30px rgba(0,0,0,.4)}
   }
   *{box-sizing:border-box}
+  [hidden]{display:none!important}
   html{scroll-behavior:smooth}
   body{margin:0;font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--tx);background:var(--bg)}
   a{color:inherit}
@@ -45,8 +46,9 @@
   /* hero */
   .hero{padding:0;background:var(--bg)}
   .hero-grid{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 64px);min-height:calc(100svh - 64px)}
-  .hero-copy{align-self:center;max-width:620px;justify-self:end;padding:48px 48px 48px max(20px,calc((100vw - 1120px)/2 + 20px))}
-  @media(max-width:880px){.hero-grid{grid-template-columns:1fr}.hero-copy{padding:44px 20px;max-width:none}}
+  .hero-copy{align-self:center;padding:56px 48px 56px max(20px,calc((100vw - 1120px)/2 + 20px))}
+  .hero-copy>*{max-width:560px}
+  @media(max-width:880px){.hero-grid{grid-template-columns:1fr}.hero-copy{padding:44px 20px}}
   .hero .lead{margin:20px 0 28px}
   .cta{display:flex;gap:12px;flex-wrap:wrap}
   .trust{display:flex;gap:20px;flex-wrap:wrap;margin-top:26px;color:var(--mut);font-size:.9rem}
@@ -127,6 +129,35 @@
   @media(max-width:880px){#shotTabs{flex-direction:row;flex-wrap:wrap}}
   #shotTabs button{font:inherit;font-weight:600;text-align:left;padding:11px 16px;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);cursor:pointer}
   #shotTabs button[aria-selected=true]{background:var(--p);border-color:var(--p);color:var(--on-p)}
+  .demo-tag{margin-left:auto;font-size:.7rem;font-weight:600;color:var(--mut)}
+  .ms{display:grid;grid-template-columns:150px 1fr;aspect-ratio:16/10;border-radius:8px;background:var(--bg2);overflow:hidden;font-size:.8rem;transition:opacity .25s}
+  .ms-side{background:var(--bg);border-right:1px solid var(--bd);padding:12px 8px}
+  .ms-side b{display:block;font-size:.8rem;padding:2px 8px 10px}
+  .ms-side span{display:block;padding:6px 10px;border-radius:8px;color:var(--mut);font-size:.75rem;white-space:nowrap}
+  .ms-side span.on{background:var(--p-soft);color:var(--p);font-weight:700}
+  .ms-main{padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+  .ms-main h4{margin:0;font-size:1rem;display:flex;justify-content:space-between;align-items:center;gap:8px}
+  .chip{font-size:.7rem;font-weight:600;border:1px solid var(--bd);background:var(--bg);border-radius:8px;padding:3px 9px;white-space:nowrap}
+  .chip.p{background:var(--p);border-color:var(--p);color:var(--on-p)}
+  .kp{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+  .kp div{background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:8px 10px}
+  .kp b{display:block;font-size:1.2rem}
+  .kp small{color:var(--mut)}
+  .tb{background:var(--bg);border:1px solid var(--bd);border-radius:10px;overflow:hidden}
+  .tb .r{display:grid;gap:8px;padding:7px 12px;align-items:center;border-top:1px solid var(--bd)}
+  .tb .r:first-child{border-top:0;background:var(--bg2);font-weight:700;color:var(--mut);font-size:.7rem;text-transform:uppercase}
+  .hb{display:grid;grid-template-columns:90px 1fr 40px;gap:10px;align-items:center}
+  .hb i{display:block;height:12px;border-radius:6px;background:var(--p)}
+  .vb{display:flex;align-items:flex-end;gap:12px;height:150px;background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:14px}
+  .vb div{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px;height:100%;font-size:.7rem;color:var(--mut)}
+  .vb i{display:block;width:100%;border-radius:6px 6px 0 0;background:var(--p)}
+  .kio{grid-column:1/-1;display:grid;place-items:center;text-align:center;background:linear-gradient(160deg,var(--p),var(--p-dark));color:var(--on-p);padding:20px;gap:10px;align-content:center}
+  .kio .cam{position:relative;width:150px;height:150px;border-radius:50%;border:4px solid rgba(255,255,255,.7);background:rgba(255,255,255,.15);display:grid;place-items:center;font-size:64px;overflow:hidden}
+  .kio .cam::after{content:"";position:absolute;left:0;right:0;height:3px;background:#fff;box-shadow:0 0 14px #fff;animation:beam 2.2s ease-in-out infinite}
+  .kio .btns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+  .kio .btns span{background:rgba(255,255,255,.2);border-radius:10px;padding:7px 12px;font-weight:600;font-size:.75rem}
+  .kio .btns span.on{background:#fff;color:var(--p)}
+  @media(max-width:560px){.ms{grid-template-columns:1fr;aspect-ratio:auto}.ms-side{display:none}.kp{grid-template-columns:1fr 1fr}}
   .toast{position:absolute;right:84px;bottom:22px;z-index:2;max-width:300px;background:#fff;color:#12141F;border-radius:14px;padding:12px 16px;font-size:.85rem;font-weight:600;box-shadow:0 12px 30px rgba(0,0,0,.25);display:flex;gap:10px;align-items:center;animation:slide .5s ease both}
   .toast small{display:block;color:#5B6075;font-weight:500}
   .live{margin-left:auto;font-size:.75rem;font-weight:700;color:var(--ok);display:flex;align-items:center;gap:6px}
@@ -220,7 +251,7 @@
   <div class="wrap">
     <div class="head"><div class="eyebrow">La plataforma</div><h2>Míralo por dentro</h2></div>
     <div class="shot">
-      <div class="shot-frame"><div class="mock-top"><i></i><i></i><i></i></div><img id="shotImg" alt=""></div>
+      <div class="shot-frame"><div class="mock-top"><i></i><i></i><i></i><span class="demo-tag" id="demoTag">Datos de ejemplo</span></div><img id="shotImg" alt="" hidden><div id="shotMock" class="ms"></div></div>
       <div class="shot-side">
         <div id="shotTabs" role="tablist"></div>
         <p id="shotDesc" class="lead" style="font-size:1rem"></p>
@@ -370,29 +401,49 @@
 
   // Galería de capturas: solo se muestran las imágenes que existen
   (function(){
-    var lista=C.capturas||[], ok=[], pend=lista.length;
+    var lista=C.capturas||[], pend=lista.length;
     if(!pend) return;
-    lista.forEach(function(c){
-      var im=new Image();
-      im.onload=function(){ok.push(c);done()};
-      im.onerror=done;
-      im.src=c.img;
+    // Cada captura usa su imagen real si existe; si no, una vista ilustrativa con datos de ejemplo.
+    var MENU=["En Vivo","Picking","Ausentismo","Rotación","Asistencia General","Personal","Pagos","Configuración"];
+    var ACT={"en-vivo":0,picking:1,ausentismo:2,personal:5,planilla:6};
+    var tag=function(t,c){return '<span class="tag t-'+c+'">'+t+'</span>'};
+    var tabla=function(cols,head,rows){var g='grid-template-columns:'+cols;return '<div class="tb"><div class="r" style="'+g+'">'+head.map(function(h){return '<span>'+h+'</span>'}).join("")+'</div>'+rows.map(function(r){return '<div class="r" style="'+g+'">'+r.map(function(x){return '<span>'+x+'</span>'}).join("")+'</div>'}).join("")+'</div>'};
+    var VISTAS={
+      "en-vivo":function(){return '<h4>En Vivo <span class="chip">Hoy · Todas las áreas</span></h4><div class="kp"><div><b>148</b><small>Presentes</small></div><div><b>12</b><small>En almuerzo</small></div><div><b>6</b><small>Tardanzas</small></div><div><b>3</b><small>Faltas</small></div></div>'+tabla("1.4fr 1fr .8fr .9fr",["Colaborador","Área","Entrada","Estado"],[["Carlos M.","Almacén","07:52",tag("Presente","ok")],["Lucía R.","Despacho","08:04",tag("Tardanza","wa")],["Jorge P.","Picking","07:58",tag("Presente","ok")],["Ana T.","Recepción","—",tag("Falta","no")],["Miguel S.","Almacén","07:49",tag("Presente","ok")]])},
+      kiosco:function(){return '<div class="kio"><div class="cam">🙂</div><b style="font-size:1.1rem">Hola, Rosa — marcación registrada ✓</b><div class="btns"><span class="on">Ingreso</span><span>Inicio de almuerzo</span><span>Fin de almuerzo</span><span>Salida</span></div><small style="opacity:.85">Reconocimiento facial o DNI · hora del servidor</small></div>'},
+      picking:function(){var d=[["Almacén",92],["Despacho",78],["Recepción",64],["Embalaje",85],["Devoluciones",51]];return '<h4>Picking diario <span><span class="chip">01–15 oct</span> <span class="chip p">Descargar Excel</span></span></h4>'+d.map(function(x){return '<div class="hb"><span>'+x[0]+'</span><i style="width:'+x[1]+'%"></i><b>'+x[1]+'%</b></div>'}).join("")},
+      ausentismo:function(){var d=[["L",4],["M",3],["M",6],["J",2],["V",5],["S",7],["D",3]];return '<h4>Ausentismo <span class="chip">Última semana</span></h4><div class="kp"><div><b>3.8%</b><small>Promedio</small></div><div><b>7%</b><small>Pico (sáb)</small></div><div><b>18</b><small>Justificadas</small></div><div><b>9</b><small>Sin justificar</small></div></div><div class="vb">'+d.map(function(x){return '<div>'+x[1]+'%<i style="height:'+x[1]*11+'px"></i>'+x[0]+'</div>'}).join("")+'</div>'},
+      planilla:function(){return '<h4>Planilla y pagos <span class="chip p">Cierre de mes</span></h4>'+tabla("1.4fr .6fr .7fr .7fr .9fr",["Colaborador","Días","Horas","Tard.","Total"],[["Carlos M.","26","208","0","S/ 1,820"],["Lucía R.","25","200","2","S/ 1,750"],["Jorge P.","26","211","1","S/ 1,860"],["Ana T.","22","176","0","S/ 1,540"],["Miguel S.","26","209","0","S/ 1,830"]])},
+      personal:function(){return '<h4>Personal <span><span class="chip">Buscar…</span> <span class="chip p">Importar Excel</span></span></h4>'+tabla("1.4fr 1fr 1fr .8fr",["Colaborador","Área","Turno","Estado"],[["Carlos M.","Almacén","Mañana",tag("Activo","ok")],["Lucía R.","Despacho","Tarde",tag("Activo","ok")],["Jorge P.","Picking","Mañana",tag("Activo","ok")],["Ana T.","Recepción","Mañana",tag("Vacaciones","wa")],["Miguel S.","Almacén","Noche",tag("Activo","ok")]])}
+    };
+    function vista(c){
+      var t=c.tipo||(c.img||"").replace(/^.*\//,"").replace(/\.\w+$/,""), f=VISTAS[t]||VISTAS["en-vivo"];
+      if(t==="kiosco") return f();
+      if(!VISTAS[t]) t="en-vivo";
+      var a=ACT[t]; return '<div class="ms-side"><b>◉ '+esc(C.producto||"")+'</b>'+MENU.map(function(m,i){return '<span'+(i===a?' class="on"':'')+'>'+m+'</span>'}).join("")+'</div><div class="ms-main">'+f()+'</div>';
+    }
+    var tabs=$("#shotTabs"), img=$("#shotImg"), mk=$("#shotMock"), real={};
+    function done(){ if(--pend>0) return; arrancar(); }
+    lista.forEach(function(c,k){
+      var im=new Image(); im.onload=function(){real[k]=true;done()}; im.onerror=done; im.src=c.img||"";
+      if(!c.img) done();
     });
-    function done(){
-      if(--pend>0) return;
-      ok.sort(function(a,b){return lista.indexOf(a)-lista.indexOf(b)});
-      if(!ok.length) return;
-      var tabs=$("#shotTabs"), img=$("#shotImg");
-      tabs.innerHTML=ok.map(function(c,k){return '<button role="tab" aria-selected="'+(k===0)+'" data-k="'+k+'">'+esc(c.titulo)+'</button>'}).join("");
+    function pinta(k){
+      var c=lista[k];
+      $("#shotDesc").textContent=c.desc||"";
+      if(real[k]){ mk.hidden=true; img.hidden=false; img.src=c.img; img.alt=c.titulo; $("#demoTag").style.display="none"; }
+      else { img.hidden=true; mk.hidden=false; mk.style.display=((c.tipo||c.img||"").indexOf("kiosco")>-1)?"block":""; mk.innerHTML=vista(c); $("#demoTag").style.display=""; }
+    }
+    function arrancar(){
+      tabs.innerHTML=lista.map(function(c,k){return '<button role="tab" aria-selected="'+(k===0)+'" data-k="'+k+'">'+esc(c.titulo)+'</button>'}).join("");
       function show(k){
-        img.style.opacity=0;
-        setTimeout(function(){img.src=ok[k].img;img.alt=ok[k].titulo;$("#shotDesc").textContent=ok[k].desc||"";img.style.opacity=1},180);
+        var f=document.querySelector(".shot-frame"); f.style.opacity=.2;
+        setTimeout(function(){pinta(k);f.style.opacity=1},180);
         tabs.querySelectorAll("button").forEach(function(b,j){b.setAttribute("aria-selected",j===k)});
       }
-      tabs.addEventListener("click",function(e){var b=e.target.closest("button");if(b)show(+b.dataset.k)});
-      img.src=ok[0].img; img.alt=ok[0].titulo; $("#shotDesc").textContent=ok[0].desc||"";
-      $("#capturas").hidden=false;
-      var n=0; setInterval(function(){ if(document.hidden||tabs.matches(":hover")) return; n=(n+1)%ok.length; show(n) },5000);
+      tabs.addEventListener("click",function(e){var b=e.target.closest("button");if(b){n=+b.dataset.k;show(n)}});
+      pinta(0); $("#capturas").hidden=false;
+      var n=0; setInterval(function(){ if(document.hidden||tabs.matches(":hover")) return; n=(n+1)%lista.length; show(n) },5000);
     }
   })();
 
