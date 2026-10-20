@@ -19,12 +19,16 @@ window.VENTAS_CONFIG = {
   // (o cambia las rutas). Las que no existan se omiten; si no hay ninguna, la sección se oculta.
   // Usa capturas con datos de ejemplo: no muestres personal real de un cliente.
   capturas: [
-    { tipo: "en-vivo", img: "img/en-vivo.jpg",      titulo: "En vivo",          desc: "Quién llegó, quién falta y quién está en almuerzo, al instante." },
-    { img: "img/kiosco.jpg",       titulo: "Kiosco de marcación", desc: "App para tablet en la entrada: el colaborador marca ingreso, almuerzo o salida con su rostro." },
-    { img: "img/picking.jpg",      titulo: "Picking diario",    desc: "Control de la operación día a día con Excel por rango de fechas." },
+    { tipo: "en-vivo", img: "img/en-vivo.jpg",      titulo: "En vivo",          desc: "Quién llegó, quién falta y quién está en almuerzo, al instante.",
+      notas: [{ x: 70, y: 21, t: "Indicadores en tiempo real" }, { x: 66, y: 62, t: "Presentes por zona de picking" }, { x: 80, y: 90, t: "Exporta a Excel en 1 clic" }] },
+    { img: "img/kiosco.jpg",       titulo: "Kiosco de marcación", desc: "App para tablet en la entrada: el colaborador marca ingreso, almuerzo o salida con su rostro.",
+      notas: [{ x: 50, y: 20, t: "Un toque para marcar" }, { x: 50, y: 72, t: "Ingreso · Almuerzo · Salida" }, { x: 17, y: 93, t: "Registro biométrico" }] },
+    { img: "img/picking.jpg",      titulo: "Picking diario",    desc: "Control de la operación día a día con Excel por rango de fechas.",
+      notas: [{ x: 45, y: 35, t: "Filtra por turno y supervisor" }, { x: 55, y: 78, t: "Indicadores del día" }] },
     { img: "img/ausentismo.png",   titulo: "Ausentismo",        desc: "Indicadores para detectar patrones antes de que afecten la operación." },
     { img: "img/planilla.png",     titulo: "Planilla y pagos",  desc: "Asistencia lista para el cierre de mes." },
-    { img: "img/personal.jpg",     titulo: "Personal",          desc: "Censo del personal y carga masiva desde Excel." },
+    { img: "img/personal.jpg",     titulo: "Personal",          desc: "Censo del personal y carga masiva desde Excel.",
+      notas: [{ x: 80, y: 33, t: "Cobertura biométrica" }, { x: 52, y: 80, t: "Ficha por colaborador" }] },
   ],
 
   moneda: "S/",

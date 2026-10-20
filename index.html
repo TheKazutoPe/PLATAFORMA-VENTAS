@@ -120,17 +120,38 @@
   .hero-media.has-video .mock,.hero-media.has-video .float{display:none}
   .brandchip{position:absolute;top:22px;left:22px;z-index:2;display:flex;align-items:center;gap:8px;background:rgba(10,12,24,.55);backdrop-filter:blur(8px);color:#fff;font-weight:700;font-size:.85rem;padding:6px 12px 6px 6px;border-radius:12px}
   .brandchip .dot{width:24px;height:24px;font-size:13px;background:#fff;color:var(--p)}
-  .shot{display:grid;grid-template-columns:1.6fr .8fr;gap:32px;align-items:start}
-  @media(max-width:880px){.shot{grid-template-columns:1fr}}
-  .shot-frame{background:var(--bg);border:1px solid var(--bd);border-radius:16px;box-shadow:var(--sh);padding:12px;overflow:hidden}
-  .shot-frame img{width:100%;display:block;border-radius:8px;aspect-ratio:16/10;object-fit:cover;object-position:top;background:var(--bg2);transition:opacity .25s}
-  .shot-frame img.v{object-fit:contain;object-position:center}
-  .shot-frame .mock-top{margin-bottom:10px}
-  #shotTabs{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
-  @media(max-width:880px){#shotTabs{flex-direction:row;flex-wrap:wrap}}
-  #shotTabs button{font:inherit;font-weight:600;text-align:left;padding:11px 16px;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);cursor:pointer}
+  .wide{max-width:1240px}
+  .head.center{text-align:center}
+  .head.center .lead{margin:12px auto 0}
+  #shotTabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:28px}
+  #shotTabs button{position:relative;overflow:hidden;font:inherit;font-weight:600;padding:10px 18px;border-radius:99px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);cursor:pointer;transition:transform .2s,border-color .2s}
+  #shotTabs button:hover{transform:translateY(-2px);border-color:var(--p)}
   #shotTabs button[aria-selected=true]{background:var(--p);border-color:var(--p);color:var(--on-p)}
-  .demo-tag{margin-left:auto;font-size:.7rem;font-weight:600;color:var(--mut)}
+  #shotTabs button[aria-selected=true]::after{content:"";position:absolute;left:0;bottom:0;height:3px;background:rgba(255,255,255,.75);animation:prog 5s linear forwards}
+  #capturas.paused #shotTabs button::after{animation-play-state:paused}
+  @keyframes prog{from{width:0}to{width:100%}}
+  .stage{position:relative;perspective:1600px}
+  .glow{position:absolute;inset:10% 4% -6%;background:radial-gradient(closest-side,var(--p),transparent);opacity:.4;filter:blur(70px);z-index:0;animation:breathe 6s ease-in-out infinite}
+  @keyframes breathe{50%{opacity:.22;transform:scale(1.05)}}
+  .shot-frame{position:relative;z-index:1;background:var(--bg);border:1px solid var(--bd);border-radius:18px;box-shadow:0 30px 80px rgba(0,0,0,.35);overflow:hidden;transition:transform .2s ease-out,opacity .3s}
+  .shot-frame .bar{display:flex;align-items:center;gap:6px;padding:10px 14px;border-bottom:1px solid var(--bd);background:var(--bg2)}
+  .bar i{width:10px;height:10px;border-radius:50%;background:var(--bd)}
+  .bar .url{margin:0 auto;background:var(--bg);border:1px solid var(--bd);border-radius:8px;padding:3px 36px;font-size:.75rem;color:var(--mut)}
+  .demo-tag{font-size:.7rem;font-weight:600;color:var(--mut);position:absolute;right:14px}
+  .view{position:relative;overflow:hidden;cursor:zoom-in}
+  .view img{width:100%;display:block;aspect-ratio:16/10;object-fit:cover;object-position:top;background:var(--bg2);transition:transform 8s ease}
+  .view:hover img{transform:scale(1.05)}
+  @keyframes enter{from{opacity:0;transform:translateY(14px) scale(1.02)}to{opacity:1;transform:none}}
+  .zoom{position:absolute;right:14px;top:14px;z-index:3;font:inherit;font-size:.8rem;font-weight:600;border:0;border-radius:99px;padding:7px 14px;background:rgba(10,12,24,.65);color:#fff;backdrop-filter:blur(6px);cursor:pointer;opacity:0;transition:opacity .2s}
+  .view:hover .zoom{opacity:1}
+  .note{position:absolute;z-index:2;transform:translate(-50%,-50%);background:var(--p);color:var(--on-p);font-size:.85rem;font-weight:700;padding:8px 14px;border-radius:99px;box-shadow:0 10px 28px rgba(0,0,0,.4);white-space:nowrap;animation:pop .55s cubic-bezier(.2,1.4,.4,1) backwards}
+  .note::before{content:"";position:absolute;inset:-4px;border-radius:99px;border:2px solid var(--p);animation:ring 2s ease-out infinite}
+  @keyframes pop{from{transform:translate(-50%,-50%) scale(0)}}
+  @keyframes ring{from{opacity:.8;transform:scale(1)}to{opacity:0;transform:scale(1.35)}}
+  @media(max-width:640px){.note{font-size:.7rem;padding:5px 9px}}
+  .shot-desc{text-align:center;color:var(--mut);margin:24px auto 0;max-width:660px;font-size:1.05rem}
+  #lightbox{position:fixed;inset:0;z-index:50;background:rgba(5,6,12,.9);display:grid;place-items:center;padding:24px;cursor:zoom-out}
+  #lightbox img{max-width:min(1400px,100%);max-height:100%;border-radius:12px;box-shadow:0 30px 80px rgba(0,0,0,.6)}
   .ms{display:grid;grid-template-columns:150px 1fr;grid-template-rows:100%;aspect-ratio:16/10;border-radius:8px;background:var(--bg2);overflow:hidden;font-size:.8rem;transition:opacity .25s}
   .ms-side{background:var(--bg);border-right:1px solid var(--bd);padding:12px 8px}
   .ms-side b{display:block;font-size:.8rem;padding:2px 8px 10px}
@@ -249,17 +270,21 @@
 </section>
 
 <section id="capturas" class="alt" hidden>
-  <div class="wrap">
-    <div class="head"><div class="eyebrow">La plataforma</div><h2>Míralo por dentro</h2></div>
-    <div class="shot">
-      <div class="shot-frame"><div class="mock-top"><i></i><i></i><i></i><span class="demo-tag" id="demoTag">Datos de ejemplo</span></div><img id="shotImg" alt="" hidden><div id="shotMock" class="ms"></div></div>
-      <div class="shot-side">
-        <div id="shotTabs" role="tablist"></div>
-        <p id="shotDesc" class="lead" style="font-size:1rem"></p>
+  <div class="wrap wide">
+    <div class="head center"><div class="eyebrow">La plataforma</div><h2>Tu operación completa, en una sola pantalla</h2>
+      <p class="lead">Así se ve por dentro: un panel para supervisores y un kiosco para la entrada. Pasa el mouse para ampliar.</p></div>
+    <div id="shotTabs" role="tablist"></div>
+    <div class="stage" id="stage">
+      <div class="glow"></div>
+      <div class="shot-frame" id="shotFrame">
+        <div class="bar"><i></i><i></i><i></i><span class="url">tu-empresa.com/centro-control</span><span class="demo-tag" id="demoTag">Datos de ejemplo</span></div>
+        <div class="view" id="shotView"><img id="shotImg" alt="" hidden><div id="shotMock" class="ms"></div><div id="notes"></div><button class="zoom" id="zoomBtn" type="button">⤢ Ampliar</button></div>
       </div>
     </div>
+    <p id="shotDesc" class="shot-desc"></p>
   </div>
 </section>
+<div id="lightbox" hidden><img alt=""></div>
 
 <section id="como">
   <div class="wrap">
@@ -429,22 +454,43 @@
       var im=new Image(); im.onload=function(){real[k]=true;done()}; im.onerror=done; im.src=c.img||"";
       if(!c.img) done();
     });
+    var notes=$("#notes"), frame=$("#shotFrame"), sec=$("#capturas"), cur=0;
     function pinta(k){
-      var c=lista[k];
+      var c=lista[k]; cur=k;
       $("#shotDesc").textContent=c.desc||"";
-      if(real[k]){ mk.hidden=true; img.hidden=false; img.src=c.img; img.alt=c.titulo; $("#demoTag").style.display="none"; }
-      else { img.hidden=true; mk.hidden=false; mk.innerHTML=vista(c); $("#demoTag").style.display=""; }
+      if(real[k]){ mk.hidden=true; img.hidden=false; img.src=c.img; img.alt=c.titulo; $("#demoTag").style.display="none"; $("#zoomBtn").hidden=false; }
+      else { img.hidden=true; mk.hidden=false; mk.innerHTML=vista(c); $("#demoTag").style.display=""; $("#zoomBtn").hidden=true; }
+      // Etiquetas animadas sobre la captura
+      notes.innerHTML=(c.notas||[]).map(function(n,i){return '<span class="note" style="left:'+n.x+'%;top:'+n.y+'%;animation-delay:'+(.5+i*.45)+'s">'+esc(n.t)+'</span>'}).join("");
+      var v=$("#shotView"); v.style.animation="none"; void v.offsetWidth; v.style.animation="enter .6s ease both";
     }
     function arrancar(){
       tabs.innerHTML=lista.map(function(c,k){return '<button role="tab" aria-selected="'+(k===0)+'" data-k="'+k+'">'+esc(c.titulo)+'</button>'}).join("");
+      var n=0, t=0, parado=false;
       function show(k){
-        var f=document.querySelector(".shot-frame"); f.style.opacity=.2;
-        setTimeout(function(){pinta(k);f.style.opacity=1},180);
+        n=k; t=0; frame.style.opacity=.25;
+        setTimeout(function(){pinta(k);frame.style.opacity=1},200);
         tabs.querySelectorAll("button").forEach(function(b,j){b.setAttribute("aria-selected",j===k)});
       }
-      tabs.addEventListener("click",function(e){var b=e.target.closest("button");if(b){n=+b.dataset.k;show(n)}});
-      pinta(0); $("#capturas").hidden=false;
-      var n=0; setInterval(function(){ if(document.hidden||tabs.matches(":hover")) return; n=(n+1)%lista.length; show(n) },5000);
+      tabs.addEventListener("click",function(e){var b=e.target.closest("button");if(b)show(+b.dataset.k)});
+      pinta(0); sec.hidden=false;
+      // Rotación automática con barra de progreso; se detiene al pasar el mouse
+      [tabs,$("#stage")].forEach(function(el){
+        el.addEventListener("mouseenter",function(){parado=true;sec.classList.add("paused")});
+        el.addEventListener("mouseleave",function(){parado=false;sec.classList.remove("paused")});
+      });
+      setInterval(function(){ if(parado||document.hidden) return; t+=100; if(t>=5000) show((n+1)%lista.length) },100);
+      // Inclinación 3D suave siguiendo el mouse
+      var st=$("#stage");
+      if(!matchMedia("(prefers-reduced-motion:reduce)").matches && matchMedia("(hover:hover)").matches){
+        st.addEventListener("mousemove",function(e){var r=st.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;frame.style.transform="rotateY("+(x*6)+"deg) rotateX("+(-y*5)+"deg)"});
+        st.addEventListener("mouseleave",function(){frame.style.transform=""});
+      }
+      // Ampliar la captura real
+      var lb=$("#lightbox");
+      $("#shotView").addEventListener("click",function(){ if(!real[cur]) return; lb.querySelector("img").src=lista[cur].img; lb.hidden=false; });
+      lb.addEventListener("click",function(){lb.hidden=true});
+      document.addEventListener("keydown",function(e){ if(e.key==="Escape") lb.hidden=true });
     }
   })();
 
