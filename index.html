@@ -107,6 +107,32 @@
   input:focus,select:focus,textarea:focus{outline:2px solid var(--p);border-color:transparent}
   .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   @media(max-width:480px){.two{grid-template-columns:1fr}}
+  /* animación del hero */
+  .hero-media{position:relative}
+  .hero-media video{width:100%;border-radius:20px;box-shadow:var(--sh);border:1px solid var(--bd);display:block}
+  .live{margin-left:auto;font-size:.75rem;font-weight:700;color:var(--ok);display:flex;align-items:center;gap:6px}
+  .live em{width:8px;height:8px;border-radius:50%;background:var(--ok);animation:pulse 1.4s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 #16A34A66}100%{box-shadow:0 0 0 10px #16A34A00}}
+  .scan{position:relative;height:96px;border-radius:12px;background:var(--bg2);margin-bottom:12px;overflow:hidden;display:grid;place-items:center}
+  .face{font-size:44px;animation:bob 3s ease-in-out infinite}
+  @keyframes bob{50%{transform:translateY(-4px)}}
+  .beam{position:absolute;left:0;right:0;height:2px;background:var(--p);box-shadow:0 0 14px var(--p);animation:beam 2.2s ease-in-out infinite}
+  @keyframes beam{0%,100%{top:8%}50%{top:88%}}
+  .scan-t{position:absolute;left:12px;bottom:8px;font-size:.75rem;font-weight:600;color:var(--mut)}
+  .scan.ok .beam{opacity:0}
+  .scan.ok .scan-t{color:var(--ok)}
+  #feed{min-height:176px;overflow:hidden}
+  #feed .row{animation:slide .5s ease both}
+  @keyframes slide{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+  .stat b{transition:transform .3s}
+  .stat b.bump{transform:scale(1.25);color:var(--p)}
+  .float{position:absolute;background:var(--bg);border:1px solid var(--bd);box-shadow:var(--sh);border-radius:12px;padding:8px 14px;font-size:.85rem;font-weight:600;animation:bob 4s ease-in-out infinite}
+  .f1{left:-26px;bottom:60px}
+  .f2{right:-14px;top:-16px;animation-delay:1.2s}
+  @media(max-width:880px){.f1{left:0}.f2{right:0}}
+  .rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+  .rv.in{opacity:1;transform:none}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
   footer{padding:32px 0;border-top:1px solid var(--bd);color:var(--mut);font-size:.9rem}
   footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
   .wa-float{position:fixed;right:18px;bottom:18px;z-index:20;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;box-shadow:0 8px 20px rgba(0,0,0,.25);text-decoration:none;font-size:26px}
@@ -139,17 +165,19 @@
       </div>
       <div class="trust"><span>Marcación en segundos</span><span>Hora del servidor, no del dispositivo</span><span>Exporta a Excel</span></div>
     </div>
-    <div class="mock" aria-hidden="true">
-      <div class="mock-top"><i></i><i></i><i></i></div>
-      <div class="stats">
-        <div class="stat"><b>148</b><small>Presentes</small></div>
-        <div class="stat"><b>6</b><small>Tardanzas</small></div>
-        <div class="stat"><b>3</b><small>Faltas</small></div>
+    <div class="hero-media" id="heroMedia">
+      <div class="mock" aria-hidden="true">
+        <div class="mock-top"><i></i><i></i><i></i><span class="live"><em></em>En vivo</span></div>
+        <div class="scan"><div class="face">🙂</div><div class="beam"></div><div class="scan-t" id="scanT">Reconociendo rostro…</div></div>
+        <div class="stats">
+          <div class="stat"><b id="nPres">148</b><small>Presentes</small></div>
+          <div class="stat"><b id="nTard">6</b><small>Tardanzas</small></div>
+          <div class="stat"><b id="nFal">3</b><small>Faltas</small></div>
+        </div>
+        <div id="feed"></div>
       </div>
-      <div class="row"><span>Ingreso · Turno mañana</span><span class="tag t-ok">Presente</span></div>
-      <div class="row"><span>Almacén · Zona A</span><span class="tag t-ok">Presente</span></div>
-      <div class="row"><span>Despacho · Zona B</span><span class="tag t-wa">Justificado</span></div>
-      <div class="row"><span>Picking · Turno tarde</span><span class="tag t-no">Falta</span></div>
+      <div class="float f1">⏱ Hora del servidor</div>
+      <div class="float f2">📊 Excel en 1 clic</div>
     </div>
   </div>
 </section>
@@ -277,6 +305,39 @@
   }).join("");
   $("#planSel").innerHTML=(C.planes||[]).map(function(p){return '<option>'+esc(p.nombre)+'</option>'}).join("")+'<option>No estoy seguro</option>';
   document.querySelectorAll("[data-plan]").forEach(function(a){ a.addEventListener("click",function(){ $("#planSel").value=a.dataset.plan; }); });
+
+  // Video real (si hay) o simulación en vivo
+  if(C.videoUrl){
+    $("#heroMedia").innerHTML='<video src="'+esc(C.videoUrl)+'"'+(C.videoPoster?' poster="'+esc(C.videoPoster)+'"':'')+' autoplay muted loop playsinline></video>';
+  } else {
+    var gente=[["Carlos M.","Rostro","🙂"],["Lucía R.","Rostro","🙂"],["Jorge P.","DNI","🪪"],["Ana T.","Rostro","🙂"],["Miguel S.","DNI","🪪"],["Rosa V.","Rostro","🙂"],["Luis H.","Rostro","🙂"]];
+    var pasos=["Ingreso","Inicio de almuerzo","Fin de almuerzo","Salida"];
+    var feed=$("#feed"), scan=document.querySelector(".scan"), scanT=$("#scanT");
+    var pres=148, tard=6, i=0;
+    var bump=function(el,v){el.textContent=v;el.classList.add("bump");setTimeout(function(){el.classList.remove("bump")},350)};
+    function tick(){
+      var p=gente[i%gente.length], tarde=(i%5===3), paso=pasos[i%pasos.length];
+      var h=new Date(); var hora=("0"+h.getHours()).slice(-2)+":"+("0"+h.getMinutes()).slice(-2);
+      scan.classList.add("ok"); scanT.textContent="✓ "+p[0]+" reconocido";
+      var row=document.createElement("div"); row.className="row";
+      row.innerHTML='<span>'+p[2]+' '+p[0]+' · '+paso+' <small style="color:var(--mut)">'+hora+'</small></span><span class="tag '+(tarde?'t-wa':'t-ok')+'">'+(tarde?'Tardanza':'Presente')+'</span>';
+      feed.insertBefore(row,feed.firstChild);
+      while(feed.children.length>4) feed.removeChild(feed.lastChild);
+      if(paso==="Ingreso"){ pres++; bump($("#nPres"),pres); }
+      if(tarde){ tard++; bump($("#nTard"),tard); }
+      setTimeout(function(){scan.classList.remove("ok");scanT.textContent="Reconociendo rostro…"},1500);
+      i++;
+    }
+    tick(); setInterval(tick,2600);
+  }
+
+  // Aparición al hacer scroll
+  var rv=document.querySelectorAll(".card,.step,details,.head");
+  rv.forEach(function(el){el.classList.add("rv")});
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.12});
+    rv.forEach(function(el,k){el.style.transitionDelay=(k%3)*80+"ms";io.observe(el)});
+  } else rv.forEach(function(el){el.classList.add("in")});
 
   // Formulario -> WhatsApp (no se guarda nada en ningún servidor)
   $("#form").addEventListener("submit",function(e){

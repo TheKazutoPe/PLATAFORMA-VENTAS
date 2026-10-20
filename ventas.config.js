@@ -11,6 +11,10 @@ window.VENTAS_CONFIG = {
   // URL de la demo en vivo (la instalación de ejemplo). Vacío = se oculta el botón.
   demoUrl: "https://control-de-asistencia-hazel.vercel.app",
 
+  // Video del hero (mp4 corto, sin audio, ~15 s). Ej.: "video/demo.mp4". Vacío = animación en vivo.
+  videoUrl: "",
+  videoPoster: "",
+
   moneda: "S/",
   // PRECIOS DE EJEMPLO: reemplázalos por los tuyos. precio: null muestra "Cotizar".
   planes: [
