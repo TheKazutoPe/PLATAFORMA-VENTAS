@@ -24,7 +24,7 @@ window.VENTAS_CONFIG = {
     { img: "img/kiosco.png",       titulo: "Kiosco de marcación", desc: "App para tablet en la entrada: el colaborador marca ingreso, almuerzo o salida con su rostro.",
       notas: [{ x: 50, y: 20, t: "Un toque para marcar" }, { x: 50, y: 72, t: "Ingreso · Almuerzo · Salida" }, { x: 17, y: 93, t: "Registro biométrico" }] },
     { img: "img/picking.jpg",      titulo: "Picking diario",    desc: "Control de la operación día a día con Excel por rango de fechas.",
-      notas: [{ x: 45, y: 35, t: "Filtra por turno y supervisor" }, { x: 55, y: 78, t: "Indicadores del día" }] },
+      notas: [{ x: 60, y: 24, t: "Filtra por turno y supervisor" }, { x: 55, y: 78, t: "Indicadores del día" }] },
     { img: "img/ausentismo.png",   titulo: "Ausentismo",        desc: "Indicadores para detectar patrones antes de que afecten la operación." },
     { img: "img/planilla.png",     titulo: "Planilla y pagos",  desc: "Asistencia lista para el cierre de mes." },
     { img: "img/personal.jpg",     titulo: "Personal",          desc: "Censo del personal y carga masiva desde Excel.",
