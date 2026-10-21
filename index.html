@@ -113,14 +113,33 @@
   /* animación del hero */
   .hero-media{position:relative;display:grid;place-items:center;padding:56px 7%;overflow:hidden;border-bottom-left-radius:64px;background:radial-gradient(600px 400px at 85% 0%,rgba(255,255,255,.22),transparent),linear-gradient(160deg,var(--p) 0%,var(--p-dark) 100%)}
   @media(max-width:880px){.hero-media{min-height:480px;border-bottom-left-radius:0;border-top-left-radius:40px}}
-  .hero-media .mock{width:100%;max-width:440px;position:relative;z-index:1}
+  .hero-media{perspective:1800px;min-height:640px}
+  .grad{background:linear-gradient(90deg,var(--p),#22D3EE,var(--p));background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 5s linear infinite}
+  @keyframes shine{to{background-position:-200% 0}}
+  .devices{position:absolute;inset:0}
+  .dev-desk{position:absolute;left:11%;top:15%;width:108%;border-radius:14px;background:#fff;overflow:hidden;border:1px solid rgba(255,255,255,.3);box-shadow:0 50px 90px rgba(8,10,40,.55);transform:rotateY(-15deg) rotateX(5deg) rotateZ(1deg);transform-origin:left center;animation:floatd 8s ease-in-out infinite}
+  .dev-desk img,.dev-tab img{display:block;width:100%;height:auto}
+  .dbar{display:flex;gap:5px;padding:7px 10px;background:#EEF0F6}
+  .dbar i{width:8px;height:8px;border-radius:50%;background:#C9CDDA}
+  .dev-tab{position:absolute;left:3%;bottom:8%;width:50%;border:9px solid #0B0D18;border-radius:22px;background:#0B0D18;overflow:hidden;box-shadow:0 40px 70px rgba(8,10,40,.6);transform:rotateY(12deg) rotate(-3deg);animation:floatt 6s ease-in-out -2s infinite}
+  .dev-tab img{border-radius:12px}
+  @keyframes floatd{50%{transform:rotateY(-15deg) rotateX(5deg) rotateZ(1deg) translateY(-12px)}}
+  @keyframes floatt{50%{transform:rotateY(12deg) rotate(-3deg) translateY(-14px)}}
+  .hero-media .mock{position:absolute;right:5%;bottom:7%;width:min(310px,42%);z-index:4;padding:14px;box-shadow:0 30px 60px rgba(8,10,40,.5)}
+  .hero-media .mock .scan{height:70px}
+  .hero-media .mock #feed{min-height:132px}
+  .hero-media .mock .row{font-size:.78rem;padding:7px 9px}
+  @media(max-width:880px){.dev-desk{left:6%;width:100%;top:10%}.dev-tab{width:46%;bottom:20%}.hero-media{min-height:560px}}
+  @media(max-width:560px){.hero-media .mock{display:none}.dev-tab{bottom:10%}}
   .hero-media video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .hero-media.has-video{padding:0}
   .hero-media.has-video::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,color-mix(in srgb,var(--p) 70%,transparent),transparent 55%)}
-  .hero-media.has-video .mock,.hero-media.has-video .float{display:none}
+  .hero-media.has-video .mock,.hero-media.has-video .float,.hero-media.has-video .devices{display:none}
   .brandchip{position:absolute;top:22px;left:22px;z-index:2;display:flex;align-items:center;gap:8px;background:rgba(10,12,24,.55);backdrop-filter:blur(8px);color:#fff;font-weight:700;font-size:.85rem;padding:6px 12px 6px 6px;border-radius:12px}
   .brandchip .dot{width:24px;height:24px;font-size:13px;background:#fff;color:var(--p)}
-  .wide{max-width:1240px}
+  .wide{max-width:1480px}
+  #capturas .shot-frame{box-shadow:0 40px 100px rgba(0,0,0,.5),0 0 0 1px color-mix(in srgb,var(--p) 40%,transparent)}
+  #capturas{padding:96px 0}
   .head.center{text-align:center}
   .head.center .lead{margin:12px auto 0}
   #shotTabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:28px}
@@ -199,8 +218,10 @@
   .stat b{transition:transform .3s}
   .stat b.bump{transform:scale(1.25);color:var(--p)}
   .float{position:absolute;background:var(--bg);border:1px solid var(--bd);box-shadow:var(--sh);border-radius:12px;padding:8px 14px;font-size:.85rem;font-weight:600;animation:bob 4s ease-in-out infinite}
-  .f1{left:6%;bottom:96px;z-index:2;color:var(--tx)}
-  .f2{right:6%;top:70px;z-index:2;animation-delay:1.2s;color:var(--tx)}
+  .f1{left:44%;bottom:26px;z-index:5;color:var(--tx)}
+  .f2{right:5%;top:22px;z-index:5;animation-delay:1.2s;color:var(--tx)}
+  .hero-media .toast{right:auto;left:22px;top:72px;bottom:auto;z-index:5}
+  @media(max-width:880px){.f1{left:6%;bottom:16px}.hero-media .toast{display:none}}
   .rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
   .rv.in{opacity:1;transform:none}
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
@@ -228,7 +249,7 @@
   <div class="hero-grid">
     <div class="hero-copy">
       <div class="eyebrow">Asistencia biométrica para empresas</div>
-      <h1>Sabe quién está en tu operación, en tiempo real.</h1>
+      <h1>Sabe quién está en tu operación, <span class="grad">en tiempo real.</span></h1>
       <p class="lead">Marcación por rostro o DNI, seguimiento en vivo, picking diario, ausentismo y planilla. Sin servidores que instalar: tu equipo marca hoy y tú ves todo desde un solo panel.</p>
       <div class="cta">
         <a class="btn btn-p" href="#contacto">Solicitar demo gratis</a>
@@ -237,6 +258,10 @@
       <div class="trust"><span>Marcación en segundos</span><span>Hora del servidor, no del dispositivo</span><span>Exporta a Excel</span></div>
     </div>
     <div class="hero-media" id="heroMedia">
+      <div class="devices" aria-hidden="true">
+        <div class="dev-desk"><div class="dbar"><i></i><i></i><i></i></div><img src="img/en-vivo.jpg" alt="" onerror="this.closest('.devices').remove()"></div>
+        <div class="dev-tab"><img src="img/kiosco.png" alt="" onerror="this.parentNode.remove()"></div>
+      </div>
       <div class="mock" aria-hidden="true">
         <div class="mock-top"><i></i><i></i><i></i><span class="live"><em></em>En vivo</span></div>
         <div class="scan"><div class="face">🙂</div><div class="beam"></div><div class="scan-t" id="scanT">Reconociendo rostro…</div></div>
