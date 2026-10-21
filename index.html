@@ -46,9 +46,23 @@
   /* hero */
   .hero{padding:0;background:var(--bg)}
   .hero-grid{display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 64px);min-height:calc(100svh - 64px)}
-  .hero-copy{align-self:center;padding:56px 48px 56px max(20px,calc((100vw - 1120px)/2 + 20px))}
-  .hero-copy>*{max-width:560px}
-  @media(max-width:880px){.hero-grid{grid-template-columns:1fr}.hero-copy{padding:44px 20px}}
+  .hero-copy{position:relative;align-self:stretch;display:flex;flex-direction:column;justify-content:center;overflow:hidden;padding:56px 48px 120px clamp(24px,7vw,140px)}
+  .hero-copy::before{content:"";position:absolute;inset:0;background-image:radial-gradient(color-mix(in srgb,var(--tx) 16%,transparent) 1px,transparent 1px);background-size:26px 26px;-webkit-mask-image:radial-gradient(ellipse at 30% 40%,#000,transparent 70%);mask-image:radial-gradient(ellipse at 30% 40%,#000,transparent 70%)}
+  .hero-copy::after{content:"";position:absolute;width:520px;height:520px;left:-120px;top:8%;border-radius:50%;background:radial-gradient(closest-side,var(--p),transparent);opacity:.22;filter:blur(40px);animation:breathe 7s ease-in-out infinite}
+  .hero-copy>*{position:relative;z-index:1;max-width:660px}
+  .hero-copy h1{font-size:clamp(2.4rem,4.3vw,4.5rem)}
+  .hero-copy .lead{font-size:clamp(1.05rem,1.4vw,1.3rem)}
+  .mini{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:34px}
+  .mini div{background:color-mix(in srgb,var(--bg2) 85%,transparent);border:1px solid var(--bd);border-radius:14px;padding:14px;transition:transform .25s,border-color .25s}
+  .mini div:hover{transform:translateY(-4px);border-color:var(--p)}
+  .mini b{display:block;font-size:.92rem;margin-bottom:2px}
+  .mini small{color:var(--mut);font-size:.8rem;line-height:1.35;display:block}
+  .hero-copy>.ticker{position:absolute;left:0;right:0;bottom:30px;max-width:none;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+  .ticker>div{display:flex;gap:12px;width:max-content;animation:tick 45s linear infinite}
+  .ticker span{white-space:nowrap;font-size:.85rem;font-weight:600;padding:8px 14px;border-radius:99px;border:1px solid var(--bd);background:var(--bg2);color:var(--mut)}
+  @keyframes tick{to{transform:translateX(-50%)}}
+  @media(max-width:880px){.hero-grid{grid-template-columns:1fr}.hero-copy{padding:44px 20px 100px}}
+  @media(max-width:560px){.mini{grid-template-columns:1fr}.hero-copy{padding-bottom:90px}}
   .hero .lead{margin:20px 0 28px}
   .cta{display:flex;gap:12px;flex-wrap:wrap}
   .trust{display:flex;gap:20px;flex-wrap:wrap;margin-top:26px;color:var(--mut);font-size:.9rem}
@@ -255,7 +269,15 @@
         <a class="btn btn-p" href="#contacto">Solicitar demo gratis</a>
         <a class="btn btn-o" id="demoBtn" href="#" target="_blank" rel="noopener" hidden>Ver demo en vivo</a>
       </div>
-      <div class="trust"><span>Marcación en segundos</span><span>Hora del servidor, no del dispositivo</span><span>Exporta a Excel</span></div>
+      <div class="mini">
+        <div><b>🙂 Rostro o DNI</b><small>Marcación en segundos</small></div>
+        <div><b>🕒 Hora del servidor</b><small>No se altera desde el dispositivo</small></div>
+        <div><b>📊 Excel en 1 clic</b><small>Reportes por rango de fechas</small></div>
+      </div>
+      <div class="ticker" aria-hidden="true"><div id="tickerTrack">
+        <span>✅ Carlos M. · Ingreso 07:52</span><span>🍽 Lucía R. · Inicio de almuerzo 12:01</span><span>✅ Jorge P. · Ingreso 07:58</span><span>🚪 Ana T. · Salida 17:02</span><span>🍽 Miguel S. · Fin de almuerzo 12:58</span><span>✅ Rosa V. · Ingreso 08:03</span>
+        <span>✅ Carlos M. · Ingreso 07:52</span><span>🍽 Lucía R. · Inicio de almuerzo 12:01</span><span>✅ Jorge P. · Ingreso 07:58</span><span>🚪 Ana T. · Salida 17:02</span><span>🍽 Miguel S. · Fin de almuerzo 12:58</span><span>✅ Rosa V. · Ingreso 08:03</span>
+      </div></div>
     </div>
     <div class="hero-media" id="heroMedia">
       <div class="devices" aria-hidden="true">
